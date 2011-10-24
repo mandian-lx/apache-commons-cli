@@ -3,7 +3,7 @@
 
 Name:             apache-%{short_name}
 Version:          1.2
-Release:          5
+Release:          4
 Summary:          Command Line Interface Library for Java
 Group:            Development/Java
 License:          ASL 2.0
@@ -13,14 +13,14 @@ BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:        noarch
 
 BuildRequires:    java-devel >= 0:1.6.0
-BuildRequires:    jpackage-utils >= 0:1.7.5
+BuildRequires:    jpackage-utils
 BuildRequires:    apache-commons-parent
 
 Requires:         java >= 0:1.6.0
-Requires:         jpackage-utils >= 0:1.7.5
+Requires:         jpackage-utils
 
-Requires(post):   jpackage-utils >= 0:1.7.5
-Requires(postun): jpackage-utils >= 0:1.7.5
+Requires(post):   jpackage-utils
+Requires(postun): jpackage-utils
 
 # This should go away with F-17
 Provides:         jakarta-%{short_name} = 0:%{version}-%{release}
@@ -33,7 +33,7 @@ command line arguments and options.
 %package javadoc
 Summary:          Javadoc for %{name}
 Group:            Development/Java
-Requires:         jpackage-utils >= 0:1.7.5
+Requires:         jpackage-utils
 # This should go away with F-17
 Obsoletes:        jakarta-%{short_name}-javadoc < 0:1.1-6
 
