@@ -3,7 +3,7 @@
 
 Name:             apache-%{short_name}
 Version:          1.2
-Release:          4
+Release:          6
 Summary:          Command Line Interface Library for Java
 Group:            Development/Java
 License:          ASL 2.0
