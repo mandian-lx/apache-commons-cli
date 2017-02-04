@@ -17,6 +17,7 @@ BuildRequires:  maven-local
 BuildRequires:  mvn(junit:junit)
 BuildRequires:  mvn(org.apache.commons:commons-parent:pom:)
 BuildRequires:  mvn(org.apache.maven.plugins:maven-antrun-plugin)
+BuildRequires:  mvn(org.jacoco:jacoco-maven-plugin)
 
 %description
 The CLI library provides a simple and easy to use API for working with the 
