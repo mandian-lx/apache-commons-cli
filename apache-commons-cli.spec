@@ -17,7 +17,7 @@ BuildRequires:  maven-local
 BuildRequires:  mvn(junit:junit)
 BuildRequires:  mvn(org.apache.commons:commons-parent:pom:)
 BuildRequires:  mvn(org.apache.maven.plugins:maven-antrun-plugin)
-BuildRequires:  mvn(org.jacoco:jacoco-maven-plugin)
+#BuildRequires:  mvn(org.jacoco:jacoco-maven-plugin)
 
 %description
 The CLI library provides a simple and easy to use API for working with the 
@@ -33,6 +33,9 @@ This package contains the API documentation for %{name}.
 %setup -q -n %{short_name}-%{version}-src
 
 %patch0 -p1
+
+# FIXME: prevent jacoco failure
+find . -iname "*jacoco*" -delete
 
 # Compatibility links
 %mvn_alias "%{short_name}:%{short_name}" "org.apache.commons:%{short_name}"
