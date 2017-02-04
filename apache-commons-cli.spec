@@ -1,22 +1,22 @@
-%{?_javapackages_macros:%_javapackages_macros}
 %global short_name      commons-cli
 
 Name:             apache-%{short_name}
-Version:          1.2
-Release:          11.1%{?dist}
+Version:          1.3.1
+Release:          1
 Summary:          Command Line Interface Library for Java
-
 License:          ASL 2.0
 URL:              http://commons.apache.org/cli/
-Source0:          http://www.apache.org/dist/commons/cli/source/%{short_name}-%{version}-src.tar.gz
 BuildArch:        noarch
 
-BuildRequires:    java-devel >= 1:1.6.0
-BuildRequires:    jpackage-utils
-BuildRequires:    maven-local
+Source0:          http://www.apache.org/dist/commons/cli/source/%{short_name}-%{version}-src.tar.gz
 
-Requires:         java >= 1:1.6.0
-Requires:         jpackage-utils
+# workaround for https://issues.apache.org/jira/browse/CLI-253
+Patch0:           CLI-253-workaround.patch
+
+BuildRequires:  maven-local
+BuildRequires:  mvn(junit:junit)
+BuildRequires:  mvn(org.apache.commons:commons-parent:pom:)
+BuildRequires:  mvn(org.apache.maven.plugins:maven-antrun-plugin)
 
 %description
 The CLI library provides a simple and easy to use API for working with the 
@@ -25,13 +25,13 @@ command line arguments and options.
 %package javadoc
 Summary:          Javadoc for %{name}
 
-Requires:         jpackage-utils
-
 %description javadoc
 This package contains the API documentation for %{name}.
 
 %prep
 %setup -q -n %{short_name}-%{version}-src
+
+%patch0 -p1
 
 # Compatibility links
 %mvn_alias "%{short_name}:%{short_name}" "org.apache.commons:%{short_name}"
@@ -44,12 +44,39 @@ This package contains the API documentation for %{name}.
 %mvn_install
 
 %files -f .mfiles
-%doc LICENSE.txt NOTICE.txt README.txt RELEASE-NOTES.txt
+%doc LICENSE.txt NOTICE.txt README.md RELEASE-NOTES.txt
 
 %files javadoc -f .mfiles-javadoc
 %doc LICENSE.txt NOTICE.txt
 
 %changelog
+* Wed Feb 01 2017 Michael Simacek <msimacek@redhat.com> - 1.3.1-5
+- Remove BR on jacoco
+
+* Wed Jun 15 2016 Mikolaj Izdebski <mizdebsk@redhat.com> - 1.3.1-4
+- Regenerate build-requires
+
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1.3.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Tue Jun 23 2015 Michal Srb <msrb@redhat.com> - 1.3.1-2
+- Add workaround for CLI-253
+
+* Wed Jun 17 2015 Michal Srb <msrb@redhat.com> - 1.3.1-1
+- Update to upstream version 1.3.1
+
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.3-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
+* Wed Jun  3 2015 Mikolaj Izdebski <mizdebsk@redhat.com> - 1.3-1
+- Update to upstream version 1.3
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.2-13
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Tue Mar 04 2014 Stanislav Ochotnicky <sochotnicky@redhat.com> - 1.2-12
+- Use Requires: java-headless rebuild (#1067528)
+
 * Mon Aug 05 2013 Mat Booth <fedora@matbooth.co.uk> - 1.2-11
 - Update for newer guidelines
 - Drop ancient obsoletes/provides on old jakarta name
