@@ -1,3 +1,5 @@
+%{?_javapackages_macros:%_javapackages_macros}
+
 %global short_name      commons-cli
 
 Name:             apache-%{short_name}
