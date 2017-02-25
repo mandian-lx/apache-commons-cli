@@ -6,6 +6,7 @@ Name:             apache-%{short_name}
 Version:          1.3.1
 Release:          1
 Summary:          Command Line Interface Library for Java
+Group:            Development/Java
 License:          ASL 2.0
 URL:              http://commons.apache.org/cli/
 BuildArch:        noarch
